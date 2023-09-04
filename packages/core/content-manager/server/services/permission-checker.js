@@ -33,6 +33,10 @@ const createPermissionChecker =
       return permissionsManager.sanitizeOutput(data, { subject: toSubject(data), action });
     };
 
+    const sanitizeSafeQueryOutput = (data) => {
+      return permissionsManager.sanitizeOutput(data, { subject: toSubject(data), action: ACTIONS.read, safeQuery: true });
+    };
+
     const sanitizeQuery = (query, { action = ACTIONS.read } = {}) => {
       return permissionsManager.sanitizeQuery(query, { subject: model, action });
     };
@@ -90,6 +94,7 @@ const createPermissionChecker =
       cannot, // check if you don't have the permission
       // Sanitizers
       sanitizeOutput,
+      sanitizeSafeQueryOutput,
       sanitizeQuery,
       sanitizeCreateInput,
       sanitizeUpdateInput,
